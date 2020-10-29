@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         final String monitor = "Monitor";
+        final String monitor2 = "Monitor2";
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
         Resource resource = new Resource("Resource");
         final Writer[] writer = new Writer[1];

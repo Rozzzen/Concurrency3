@@ -21,13 +21,13 @@ public class Hairdresser extends Thread{
         this.sleeping = sleeping;
     }
 
-    public synchronized void sleep() throws InterruptedException {
+    public void sleep() throws InterruptedException {
         System.out.println("Hairdresser went to sleep");
         sleeping = true;
         lock.unlock();
-        wait();
+        sleep(1000000);
     }
-    
+
     public boolean isSleeping() {
         return sleeping;
     }
@@ -49,9 +49,7 @@ public class Hairdresser extends Thread{
                     makeHaircut(reception.remove());
                 }
             }
-            catch (InterruptedException ignored) {
-                break;
-            }
+            catch (InterruptedException ignored) {}
         }
     }
 }

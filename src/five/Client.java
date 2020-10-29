@@ -26,11 +26,9 @@ public class Client extends Thread{
     }
 
     public void wakeUpHairdresser() throws InterruptedException {
-        synchronized (hairdresser) {
-            hairdresser.setSleeping(false);
-            hairdresser.notifyAll();
-            hairdresser.makeHaircut(this);
-        }
+        hairdresser.setSleeping(false);
+        hairdresser.makeHaircut(this);
+        hairdresser.interrupt();
     }
 
     @Override
