@@ -1,20 +1,15 @@
 package three;
 
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Reader extends Thread {
 
     private final ReentrantReadWriteLock lock;
-    private final ReentrantLock synchLock;
     private final Resource recourse;
-    private final String monitor;
 
-    public Reader(ReentrantReadWriteLock lock, ReentrantLock synchLock, Resource recourse, String monitor) {
+    public Reader(ReentrantReadWriteLock lock, Resource recourse) {
         this.lock = lock;
         this.recourse = recourse;
-        this.monitor = monitor;
-        this.synchLock = synchLock;
     }
 
     @Override

@@ -1,21 +1,18 @@
 package three;
 
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Main {
     public static void main(String[] args) {
 
-        final String monitor = "Monitor";
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-        ReentrantLock synchLock = new ReentrantLock();
         Resource resource = new Resource("Resource");
 
         final Writer[] writer = new Writer[1];
         Thread thread1 = new Thread(() -> {
             try {
                 for (int i = 0; i < 7; i++) {
-                    writer[0] = new Writer(lock, synchLock, resource, monitor);
+                    writer[0] = new Writer(lock, resource);
                     writer[0].start();
                     System.out.println("Writer has been created");
                     Thread.sleep((long) (Math.random() * 1000) + 500);
@@ -33,7 +30,7 @@ public class Main {
                         writer[0].join();
                         System.out.println("Stopped waiting");
                     }
-                    new Reader(lock, synchLock, resource, monitor).start();
+                    new Reader(lock, resource).start();
                     Thread.sleep(300);
                 }
             } catch (InterruptedException ignored) {}
