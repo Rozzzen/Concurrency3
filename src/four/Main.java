@@ -1,14 +1,15 @@
 package four;
 
-import java.util.concurrent.Semaphore;
-
 public class Main {
     public static void main(String[] args) {
-        Semaphore semaphore = new Semaphore(2);
-        new Philosopher("Socrates", semaphore).start();
-        new Philosopher("Platon", semaphore).start();
-        new Philosopher("Aristotle", semaphore).start();
-        new Philosopher("Homer", semaphore).start();
-        new Philosopher("Pythagoras", semaphore).start();
+        Fork []fork = new Fork[5];
+
+        for (int i = 0; i < 5; i++) fork[i] = new Fork();
+
+        new Philosopher(fork[0], fork[1], "Socrates").start();
+        new Philosopher(fork[1], fork[2], "Platon").start();
+        new Philosopher(fork[2], fork[3], "Aristotle").start();
+        new Philosopher(fork[3], fork[4], "Homer").start();
+        new Philosopher(fork[4], fork[0], "Pythagoras").start();
     }
 }

@@ -10,20 +10,23 @@ public class Consumer extends Thread {
 
     @Override
     public void run() {
-        while(true) {
-            try {
-                Thread.sleep((long)(Math.random() * 1000));
+        try {
+            for (int i = 0; i < 20; i++) {
                 consumeProduct();
-            } catch (InterruptedException ignored) {
-                break;
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    public void consumeProduct() {
+    public void consumeProduct() throws InterruptedException {
         synchronized (buffer) {
             System.out.println("Consumer received the product: " + buffer.remove());
-            buffer.notifyAll();
+            if(buffer.isEmpty()) {
+                System.out.println("Producing continues");
+                buffer.notifyAll();
+                buffer.wait();
+            }
         }
     }
 }

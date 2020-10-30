@@ -6,11 +6,10 @@ public class Main {
     public static void main(String[] args) {
 
         final String monitor = "Monitor";
-        final String monitor2 = "Monitor2";
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
         Resource resource = new Resource("Resource");
-        final Writer[] writer = new Writer[1];
 
+        final Writer[] writer = new Writer[1];
         Thread thread1 = new Thread(() -> {
             try {
                 for (int i = 0; i < 7; i++) {
